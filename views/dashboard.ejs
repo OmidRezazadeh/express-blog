@@ -1,0 +1,90 @@
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"
+        ><%= fullname %></a
+    >
+    <button
+        class="navbar-toggler position-absolute d-md-none collapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <input
+        class="form-control form-control-dark w-100"
+        type="text"
+        placeholder="جستجو"
+        aria-label="Search"
+    />
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="/users/logout" >خروج</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav
+            id="sidebarMenu"
+            class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+        >
+            <div class="sidebar-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">داشبورد</a>
+                    </li>
+                </ul>
+
+                <h6
+                    class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+                >
+                    <span>جدا کننده</span>
+                    <a
+                        class="d-flex align-items-center text-muted"
+                        href="#"
+                        aria-label="Add a new report"
+                    >
+                        <span class="fa fa-plus"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">تنظیمات</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <h2 class="mt-2">آخرین پست ها</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>تست</th>
+                            <th>تست</th>
+                            <th>تست</th>
+                            <th>تست</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>لورم</td>
+                            <td>ایپسوم</td>
+                            <td>تست</td>
+                            <td>تست</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
