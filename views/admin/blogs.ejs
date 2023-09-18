@@ -1,23 +1,42 @@
-<h2 class="mt-2">آخرین پست ها</h2>
-<div class="table-responsive">
-    <table class="table table-striped table-sm">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>تست</th>
-            <th>تست</th>
-            <th>تست</th>
-            <th>تست</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>لورم</td>
-            <td>ایپسوم</td>
-            <td>تست</td>
-            <td>تست</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<% if(blogs.length > 0) { %>
+
+    <h2 class="mt-2">آخرین پست ها</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>تاریخ</th>
+                <th>تست</th>
+                <th>تست</th>
+                <th>تست</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% counter = 1 %>
+            <% for (let blog of blogs) { %>
+
+                <tr>
+                    <td> <%= counter++ %></td>
+                    <td><a href="/blogs/<%= blog.id %>"><%= blog.title %></a></td>
+                    <td><%= blog.createdAt.toLocaleDateString('es-ES') %></td>
+                    <td>
+                    <span class="badge <%= blog.status === "عمومی" ? 'badge-success' : "badge-warning" %>">
+                        <%= blog.statusLabel %>
+                    </span>
+                    </td>
+                    <td>تست</td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+
+
+
+<% }else { %>
+    <div class="text-center">
+        <h3 class="mt-2">هیچ پستی وجود ندارد</h3>
+
+    </div>
+<% } %>
