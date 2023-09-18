@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.urlencoded({extended: false}));
 
 app.use(session({
-    secret: "secret", cookie: {maxAge: null}, resave: false, saveUninitialized: false
+    secret: "secret", cookie: {maxAge: 1000 * 60 * 60 * 24 * 365}, resave: false, saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
