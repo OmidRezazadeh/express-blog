@@ -1,17 +1,12 @@
 const {Router} = require('express');
-const {authenticated} =require("../middlewares/auth");
+const {authenticated} = require("../middlewares/auth");
 const router = new Router();
+const adminController = require("../controllers/adminController");
 
-router.get("/",authenticated,(req,res)=>{
-   res.render('dashboard',{
-      pageTitle:"بخش مدیریت داشبورد ",
-      path:"/dashboard",
-      layout:'./layouts/dashLayout',
-      fullname: req.user.fullname
-   });
-});
-
-router.get("/login",(req, res)=>{
-    res.render("login", {pageTitle:"ورود به بخش مدیریت",path:"/login"});
+router.get("/", authenticated, adminController.getDashboard);
+router.get('/add-post', adminController.getAddPost);
+router.get("/login", (req, res) => {
+    res.render("login", {pageTitle: "ورود به بخش مدیریت", path: "/login"});
 })
-module.exports=router;
+router.get('getAddPost')
+module.exports = router;
