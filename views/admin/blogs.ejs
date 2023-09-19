@@ -19,7 +19,7 @@
                 <tr>
                     <td> <%= counter++ %></td>
                     <td><a href="/blogs/<%= blog.id %>"><%= blog.title %></a></td>
-                    <td><%= blog.createdAt.toLocaleDateString('es-ES') %></td>
+                    <td><%= blog.jalaliDate %></td>
                     <td>
                     <span class="badge <%= blog.status === "عمومی" ? 'badge-success' : "badge-warning" %>">
                         <%= blog.statusLabel %>

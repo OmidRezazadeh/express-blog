@@ -1,5 +1,6 @@
 const Blog = require("../models/Blog");
 const User = require("../models/User");
+const {formatDate} = require("../utils/jalali")
 exports.getDashboard = async (req, res) => {
     const blogs = await Blog.find({user: req.user.id});
 

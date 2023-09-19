@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {formatDate} = require("../utils/jalali")
 const blogSchema = new mongoose.Schema({
     title: {
         type: String, required: true, trim: true, minLength: 5, maxLength: 255
@@ -17,6 +18,10 @@ const key = 'id';
 blogSchema.virtual("statusLabel").get(function () {
     const result = statusLabel.find(obj => obj['key'] === this.status);
     return result ? result.value : null;
-})
+});
+
+blogSchema.virtual("jalaliDate").get(function () {
+    return formatDate(this.createdAt);
+});
 
 module.exports = mongoose.model("Blog", blogSchema)

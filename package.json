@@ -23,6 +23,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "font-awesome": "^4.7.0",
+    "jalali-moment": "^3.3.11",
     "joi": "^17.10.1",
     "mongoose": "^7.5.0",
     "morgan": "^1.10.0",
