@@ -57,8 +57,6 @@ exports.store = async (req, res) => {
         };
         await User.create(user);
         req.flash("success_message", "ثبت نام موفقیت امیز بود ")
-
-
         res.redirect("/users/login");
     } catch (err) {
         const {error} = schema.validate(req.body);

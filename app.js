@@ -30,7 +30,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(session({
     unset:"destroy",
-    secret: process.env.SESSION_SECRET, cookie: {maxAge: 1000 * 60 * 60 * 24 * 365}, resave: false, saveUninitialized: false
+    secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());

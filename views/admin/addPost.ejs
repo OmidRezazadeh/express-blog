@@ -1,4 +1,8 @@
 <h3 class="mt-2 text-center">ساخت پست جدید</h3>
+<div class="w-50 mx-auto">
+    <%- include("../includes/messages.ejs") %>
+
+</div>
 <div class="d-flex align-items-center justify-content-center">
     <form action="/dashboard/add-post" class="w-50" method="POST">
         <div class="form-group">
@@ -13,7 +17,7 @@
 
         <div class="form-group">
             <label for="status">وضعیت</label>
-            <select name="status" class="form-control w-25" id="status">
+            <select name="status" type="number" class="form-control w-25" id="status">
                 <option value="0" selected>عمومی</option>
                 <option value="1">خصوصی</option>
             </select>

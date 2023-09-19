@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {formatDate} = require("../utils/jalali")
+const {schema} = require("./validation/PostValidation");
 const blogSchema = new mongoose.Schema({
     title: {
         type: String, required: true, trim: true, minLength: 5, maxLength: 255
@@ -23,5 +24,7 @@ blogSchema.virtual("statusLabel").get(function () {
 blogSchema.virtual("jalaliDate").get(function () {
     return formatDate(this.createdAt);
 });
-
+blogSchema.statics.PostValidation = function (body) {
+    return schema.validate(body, {abortEarly: false});
+}
 module.exports = mongoose.model("Blog", blogSchema)
