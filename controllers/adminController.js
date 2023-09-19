@@ -1,11 +1,8 @@
 const Blog = require("../models/Blog");
-const User = require("../models/User");
-const {formatDate} = require("../utils/jalali")
+const {get500} = require("../controllers/errorController");
 exports.getDashboard = async (req, res) => {
     const blogs = await Blog.find({user: req.user.id});
-
     try {
-
         res.render("admin/blogs", {
             pageTitle: "بخش مدیریت داشبورد",
             path: "/dashboard",
@@ -14,17 +11,26 @@ exports.getDashboard = async (req, res) => {
             blogs: blogs,
         })
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        get500(req,res);
+
     }
 
 };
 exports.getAddPost = (req, res) => {
-    res.render("admin/addPost", {
-        pageTitle: "بخش مدیریت داشبورد",
-        path: "/dashboard/add-post",
-        layout: "./layouts/dashLayout",
-        fullname: req.user.fullname
-    })
+    try {
+
+
+        res.render("admin/addPost", {
+            pageTitle: "بخش مدیریت داشبورد",
+            path: "/dashboard/add-post",
+            layout: "./layouts/dashLayout",
+            fullname: req.user.fullname
+        })
+    }catch (err){
+        console.log(err);
+        get500(req,res);
+    }
 }
 exports.createPost = async (req, res) => {
 console.log(req.user);
@@ -39,5 +45,6 @@ console.log(req.user);
         res.redirect("/dashboard");
     } catch (err) {
         console.log(err);
+        get500(req,res);
     }
 }

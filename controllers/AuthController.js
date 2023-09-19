@@ -5,10 +5,7 @@ const fetch = require("node-fetch");
 
 exports.login = (req, res) => {
     res.render("login", {
-        pageTitle: "ورود به مدیریت",
-        path: "/login",
-        message: req.flash("success_message"),
-        error: req.flash("error")
+        pageTitle: "ورود به مدیریت", path: "/login", message: req.flash("success_message"), error: req.flash("error")
     });
 };
 
@@ -21,10 +18,8 @@ exports.handleLogin = async (req, res, next) => {
     const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body["g-recaptcha-response"]}&remoteip=${req.connection.remoteAddress}`;
 
     const response = await fetch(verifyUrl, {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        method: "POST", headers: {
+            Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
         },
     });
     const json = await response.json();
@@ -32,9 +27,7 @@ exports.handleLogin = async (req, res, next) => {
 
     if (json.success) {
         passport.authenticate("local", {
-            successRedirect: "/dashboard",
-            failureRedirect: "/users/login",
-            failureFlash: true,
+            successRedirect: "/dashboard", failureRedirect: "/users/login", failureFlash: true,
         })(req, res, next);
     } else {
         req.flash("error", "اعتبار سنجی با مشکل مواجه شده")
@@ -54,9 +47,7 @@ exports.store = async (req, res) => {
         const getUser = await User.findOne({email});
         if (getUser) {
             return res.render("register", {
-                pageTitle: "ثبت نام کاربر",
-                path: "/register",
-                errors: [{message: '"email" is allrady '}],
+                pageTitle: "ثبت نام کاربر", path: "/register", errors: [{message: '"email" is allrady '}],
             });
         }
 
@@ -74,15 +65,14 @@ exports.store = async (req, res) => {
         if (error) {
             console.log(error);
             return res.render("register", {
-                pageTitle: "ثبت نام کاربر",
-                path: "/register",
-                errors: error.details,
+                pageTitle: "ثبت نام کاربر", path: "/register", errors: error.details,
             });
         }
     }
 };
 
 exports.logout = (req, res, next) => {
+    req.session = null;
     req.logout(function (err) {
         if (err) {
             return next(err);

@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="/css/bootstrap-rtl.css" />
-    <link rel="stylesheet" href="/css/font-awesome.css" />
+    <link rel="stylesheet" href="/css/bootstrap-rtl.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.css"/>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.15.1/ckeditor.js"
+            integrity="sha512-aThGT4RJc95+zt2vrs8iMjrFpsJxcFclp7tweVls6/3cNo3GWvGvtLV576o8Kdvdf3fJhrrG3wkmoea/KJMLFQ=="
+            crossorigin="anonymous"
+    ></script>
     <title><%= pageTitle %></title>
     <style>
         .bd-placeholder-img {
@@ -25,8 +30,8 @@
             }
         }
     </style>
-    <link href="/css/dashboard.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="/css/dashboard.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body class="rtl">
 <nav
@@ -66,6 +71,11 @@
         </main>
     </div>
 </div>
+<script>
+    CKEDITOR.replace("body", {
+        language: "fa",
+    });
+</script>
 <script src="/js/jquery.slim.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 </body>

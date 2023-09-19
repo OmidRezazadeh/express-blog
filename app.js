@@ -10,6 +10,7 @@ const connectDB = require("./config/db");
 const winston= require("./config/winston");
 const flash = require("connect-flash");
 const session = require("express-session");
+
 //* Load Config
 dotEnv.config({path: "./config/config.env"});
 
@@ -28,7 +29,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.urlencoded({extended: false}));
 
 app.use(session({
-    secret: "secret", cookie: {maxAge: 1000 * 60 * 60 * 24 * 365}, resave: false, saveUninitialized: false
+    unset:"destroy",
+    secret: process.env.SESSION_SECRET, cookie: {maxAge: 1000 * 60 * 60 * 24 * 365}, resave: false, saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -50,10 +52,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", require("./routes/index"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/users", require("./routes/users"));
-app.use((req, res) => {
-    res.render("404", {pageTitle: "404| صفحه پیدا نشد", path: "/404"})
-})
-
+app.use(require('./controllers/errorController').get404);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
