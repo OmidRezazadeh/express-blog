@@ -2,6 +2,7 @@ const Blog = require("../models/Blog");
 const {get500} = require("../controllers/errorController");
 const {schema} = require("../models/validation/PostValidation");
 const multer = require("multer");
+const {storage, fileFilter} = require("../utils/multer")
 const uuid = require("uuid").v4
 
 exports.getDashboard = async (req, res) => {
@@ -66,26 +67,9 @@ exports.createPost = async (req, res) => {
 exports.uploadImage = (req, res) => {
     // let fileName = `${uuid()}.jpg`;
 
-    const storage = multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, "./public/uploads/");
-        },
-        filename: (req, file, cb) => {
-            console.log(file);
-            cb(null, `${uuid()}_${file.originalname}`);
-        },
-    });
-
-    const fileFilter = (req, file, cb) => {
-        if (file.mimetype === "image/png") {
-            cb(null, true);
-        } else {
-            cb("تنها پسوند JPEG پشتیبانی میشود", false);
-        }
-    };
 
     const upload = multer({
-        limits: { fileSize: 4000000 },
+        limits: {fileSize: 4000000},
         dest: "uploads/",
         storage: storage,
         fileFilter: fileFilter,
@@ -93,10 +77,13 @@ exports.uploadImage = (req, res) => {
 
     upload(req, res, (err) => {
         if (err) {
-            console.log(err);
             res.send(err);
         } else {
-            res.status(200).send("آپلود عکس موفقیت آمیز بود");
+            if (req.file) {
+                res.status(200).send("آپلود عکس موفقیت آمیز بود");
+            } else {
+                res.send("جهت آپلود باید عکسی انتخاب کنید");
+            }
         }
     });
 }
