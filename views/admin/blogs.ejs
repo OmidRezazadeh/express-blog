@@ -23,7 +23,13 @@
                         <%= blog.statusLabel %>
                     </span>
                     </td>
-                    <td>تست</td>
+
+                    <td>
+                        <a href="/dashboard/edit-post/<%= blog._id %>" class="btn btn-sm btn-primary">ویرایش</a>
+                    </td>
+                    <td>
+                        <a href="/dashboard/delete-post/<%= blog._id %>" class="btn btn-sm btn-danger">حذف</a>
+                    </td>
                 </tr>
             <% } %>
             </tbody>

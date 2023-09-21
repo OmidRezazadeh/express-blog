@@ -65,6 +65,60 @@ exports.createPost = async (req, res) => {
         }
     }
 }
+exports.EditPost= async (req,res)=>{
+    const post = await Blog.findOne({_id: req.params.id});
+    try {
+        if (!post) {
+            return res.redirect("errors/404")
+        }
+        if (post.user.toString() !== req.user.id) {
+            return res.redirect("/dashboard");
+        } else {
+            const {title, body, status} = req.body;
+            post.title = title;
+            post.status = status;
+            post.body = body;
+            await post.save();
+            return res.redirect("/dashboard");
+
+        }
+    }catch (err){
+        console.log(err);
+        const {error} = schema.validate(req.body);
+        if (error) {
+            console.log(req.user.fullname);
+            res.render("./admin/editPost", {
+                pageTitle: "بخش مدیریت داشبورد",
+                path: "/dashboard/edit-post",
+                layout: "./layouts/dashLayout",
+                errors: error.details,
+                fullname: req.user.fullname,
+                post
+
+            });
+        }
+    }
+}
+
+exports.getEditPost = async (req, res) => {
+    const post = await Blog.findOne({_id: req.params.id});
+    if (!post) {
+        return res.redirect("errors/404")
+    }
+    if (post.user.toString() !== req.user.id) {
+        return res.redirect("/dashboard");
+    } else {
+        res.render("./admin/editPost", {
+            pageTitle: "بخش ,ویرایش داشبورد",
+            path: "/dashboard/edit-post",
+            layout: "./layouts/dashLayout",
+            fullname: req.user.fullname,
+            post,
+        });
+    }
+
+
+}
 
 exports.uploadImage = (req, res) => {
     const upload = multer({
@@ -87,7 +141,7 @@ exports.uploadImage = (req, res) => {
                     quality: 60
                 })
                     .toFile(`./public/uploads/${fileName}`)
-                res.json({"message":"","address":""});
+                res.json({"message": "", "address": ""});
                 res.status(200).send(`http://localhost:5000/uploads/${fileName}`);
             } else {
                 res.send("جهت آپلود باید عکسی انتخاب کنید");

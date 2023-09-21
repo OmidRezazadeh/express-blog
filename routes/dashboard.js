@@ -6,6 +6,8 @@ const adminController = require("../controllers/adminController");
 router.get("/", authenticated, adminController.getDashboard);
 router.get('/add-post', adminController.getAddPost);
 router.post('/add-post', adminController.createPost);
+router.get("/edit-post/:id", authenticated,adminController.getEditPost);
+router.post("/edit-post/:id", authenticated,adminController.EditPost)
 router.post("/image-upload", authenticated,adminController.uploadImage);
 router.get("/login", (req, res) => {
     res.render("login", {pageTitle: "ورود به بخش مدیریت", path: "/login"});
