@@ -4,6 +4,7 @@ const {schema} = require("../models/validation/PostValidation");
 const multer = require("multer");
 const sharp = require('sharp');
 const uuid = require("uuid").v4;
+
 const shortId = require("shortid");
 
 
@@ -11,14 +12,26 @@ const {storage, fileFilter} = require("../utils/multer")
 
 
 exports.getDashboard = async (req, res) => {
-    const blogs = await Blog.find({user: req.user.id});
+    const page = req.query.page || 1;
+    const limit = 2;
     try {
+
+        const options = {
+            page,
+            limit
+        };
+        const result = await Blog.paginate({ user: req.user.id }, options);
+
+        console.log(result)
         res.render("admin/blogs", {
             pageTitle: "بخش مدیریت داشبورد",
             path: "/dashboard",
             layout: "./layouts/dashLayout",
             fullname: req.user.fullname,
-            blogs: blogs,
+            current: page,
+            pages:result.pages,
+            blogs: result.docs,
+            totalPages: result.total,
         })
     } catch (err) {
         console.log(err);
@@ -65,7 +78,7 @@ exports.createPost = async (req, res) => {
         }
     }
 }
-exports.EditPost= async (req,res)=>{
+exports.EditPost = async (req, res) => {
     const post = await Blog.findOne({_id: req.params.id});
     try {
         if (!post) {
@@ -82,7 +95,7 @@ exports.EditPost= async (req,res)=>{
             return res.redirect("/dashboard");
 
         }
-    }catch (err){
+    } catch (err) {
         console.log(err);
         const {error} = schema.validate(req.body);
         if (error) {
@@ -97,6 +110,19 @@ exports.EditPost= async (req,res)=>{
 
             });
         }
+    }
+}
+
+exports.deletePost = async (req, res) => {
+
+    try {
+        await Blog.findByIdAndDelete(req.params.id)
+
+        res.redirect("/dashboard");
+    } catch (err) {
+        console.log(err)
+        res.render("errors/500");
+
     }
 }
 

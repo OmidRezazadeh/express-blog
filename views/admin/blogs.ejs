@@ -35,6 +35,19 @@
             </tbody>
         </table>
     </div>
+
+    <nav aria-label="Page navigation">
+        <% if (pages > 1) { %>
+            <% for (let i = 1; i <= pages; i++) { %>
+        <ul class="pagination">
+
+            <li class="page-item">   <a href="/dashboard?page=<%= i %>" class="<%= i === current ? 'active' : '' %>"><%= i %></a></li>
+                <% } %>
+        </ul>
+
+            <% } %>
+    </nav>
+
 <% }else { %>
     <div class="text-center">
         <h3 class="mt-2">هیچ پستی وجود ندارد</h3>

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {formatDate} = require("../utils/jalali")
 const {schema} = require("./validation/PostValidation");
+const mongoosePaginate = require('mongoose-paginate');
 const blogSchema = new mongoose.Schema({
     title: {
         type: String, required: true, trim: true, minLength: 5, maxLength: 255
@@ -20,7 +21,7 @@ blogSchema.virtual("statusLabel").get(function () {
     const result = statusLabel.find(obj => obj['key'] === this.status);
     return result ? result.value : null;
 });
-
+blogSchema.plugin(mongoosePaginate);
 blogSchema.virtual("jalaliDate").get(function () {
     return formatDate(this.createdAt);
 });

@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const {static} = require("express");
 const {schema} = require("./validation/UserValidation")
 const bcrypt = require("bcryptjs");
+const mongoosePaginate = require('mongoose-paginate');
+
 const userSchema = new mongoose.Schema({
     fullname: {
         type: String,
@@ -24,6 +26,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
+
 userSchema.static.userValidation = function (body) {
     return schema.validate(body, {abortEarly: false});
 }
