@@ -4,6 +4,7 @@ const {truncate} = require("../utils/truncate");
 exports.getIndex = async (req, res) => {
     try {
         const posts = await Blog.find({status: 0}).sort({createdAt: "desc"});
+
         res.render("index", {
             "pageTitle": "وبلاگ",
             path: "/",
@@ -17,8 +18,9 @@ exports.getIndex = async (req, res) => {
 };
 exports.getSinglePost = async (req, res) => {
     try {
-        const post = await Blog.findOne({id: req.params.id})
+        const post = await Blog.findOne({_id: req.params.id})
             .populate("user")
+        console.log(post);
         if (!post) return res.redirect("errors/404");
         res.render("post", {
             pageTitle: post.title,
