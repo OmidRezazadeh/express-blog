@@ -1,5 +1,6 @@
 const path = require("path");
 const debug= require('debug')('weblog-project');
+const fileUpload = require("express-fileupload");
 const express = require("express");
 const bodyParser=require("body-parser");
 const passport = require("passport");
@@ -25,6 +26,9 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
     app.use(morgan("combined",{stream:winston.stream}))
 }
+// file upload
+ app.use(fileUpload());
+
 //* Session
 app.use(express.urlencoded({extended: false}));
 

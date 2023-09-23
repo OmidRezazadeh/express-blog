@@ -7,7 +7,12 @@ const blogSchema = new mongoose.Schema({
         type: String, required: true, trim: true, minLength: 5, maxLength: 255
     }, body: {
         type: String, required: true,
-    }, status: {
+    },
+    thumbnail:{
+        type:String,
+        required:true,
+    },
+    status: {
         type: Number, default: 0, enum: [0, 1]
     }, user: {
         type: mongoose.Schema.Types.ObjectId, ref: "User"
