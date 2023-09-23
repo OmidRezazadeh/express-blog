@@ -7,9 +7,24 @@ exports.getIndex = async (req, res) => {
         res.render("index", {
             "pageTitle": "وبلاگ",
             path: "/",
-            posts:posts,
+            posts: posts,
             truncate
         })
+    } catch (err) {
+        console.log(err);
+        res.render("errors/500")
+    }
+};
+exports.getSinglePost = async (req, res) => {
+    try {
+        const post = await Blog.findOne({id: req.params.id})
+            .populate("user")
+        if (!post) return res.redirect("errors/404");
+        res.render("post", {
+            pageTitle: post.title,
+            path: "/post",
+            post: post
+        });
     } catch (err) {
         console.log(err);
         res.render("errors/500")

@@ -1,5 +1,6 @@
 const {Router} = require("express");
-const  blogController = require("../controllers/blogController");
+const blogController = require("../controllers/blogController");
 const router = new Router();
 router.get("/", blogController.getIndex);
-module.exports= router;
+router.get("single-post/:id", blogController.getSinglePost);
+module.exports = router;
