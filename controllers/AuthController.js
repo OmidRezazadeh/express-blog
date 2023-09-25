@@ -10,30 +10,30 @@ exports.login = (req, res) => {
 };
 
 exports.handleLogin = async (req, res, next) => {
-    if (!req.body["g-recaptcha-response"]) {
-        req.flash("error", "اعتبار سنجی کپچا الزامی میباشد")
-        return res.redirect("/users/login");
-    }
-    const secretKey = process.env.CAPTCHA_SECRT;
-    const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body["g-recaptcha-response"]}&remoteip=${req.connection.remoteAddress}`;
+    // if (!req.body["g-recaptcha-response"]) {
+    //     req.flash("error", "اعتبار سنجی کپچا الزامی میباشد")
+    //     return res.redirect("/users/login");
+    // }
+    // const secretKey = process.env.CAPTCHA_SECRT;
+    // const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${req.body["g-recaptcha-response"]}&remoteip=${req.connection.remoteAddress}`;
+    //
+    // const response = await fetch(verifyUrl, {
+    //     method: "POST", headers: {
+    //         Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    //     },
+    // });
+    // const json = await response.json();
 
-    const response = await fetch(verifyUrl, {
-        method: "POST", headers: {
-            Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-        },
-    });
-    const json = await response.json();
 
-
-    if (json.success) {
+    // if (json.success) {
         passport.authenticate("local", {
             successRedirect: "/dashboard", failureRedirect: "/users/login", failureFlash: true,
         })(req, res, next);
-    } else {
-        req.flash("error", "اعتبار سنجی با مشکل مواجه شده")
-        res.redirect("/users/login");
-
-    }
+    // } else {
+    //     req.flash("error", "اعتبار سنجی با مشکل مواجه شده")
+    //     res.redirect("/users/login");
+    //
+    // }
 }
 
 
