@@ -8,10 +8,6 @@ const blogSchema = new mongoose.Schema({
     }, body: {
         type: String, required: true,
     },
-    thumbnail:{
-        type:String,
-        required:true,
-    },
     status: {
         type: Number, default: 0, enum: [0, 1]
     }, user: {
