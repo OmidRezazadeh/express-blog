@@ -49,7 +49,8 @@ exports.createPost = async (req, res) => {
 
     let status = Number(req.body.status);
     try {
-        await sharp(thumbnail.data).jpeg({quality:60}).toFile(uploadPath).catch((err) => console.log(err));
+
+        await sharp(thumbnail.data).jpeg({quality: 60}).toFile(uploadPath);
         await Blog.create({
             title: req.body.title,
             body: req.body.body,
@@ -61,24 +62,26 @@ exports.createPost = async (req, res) => {
         res.redirect("/dashboard/add-post");
     } catch (err) {
 
-        const imageErrorMessage = validationImage.validation(req.files);
 
         const {error} = schema.validate(req.body);
 
         let errorMessage = null;
         let errors = [];
 
-        if (error.details[0]["message"].length > 0) {
-            errorMessage = error.details[0]["message"];
-            errors.push(errorMessage);
+        if (typeof error !== "undefined") {
+            if (error.details[0]["message"].length > 0) {
+                errorMessage = error.details[0]["message"];
+                errors.push(errorMessage);
+            }
         }
 
+
+        const imageErrorMessage = validationImage.validation(req.files);
         if (imageErrorMessage !== null) {
             errors.push(imageErrorMessage);
         }
 
 
-        if (error) {
             res.render("./admin/addPost", {
                 pageTitle: "بخش مدیریت داشبورد",
                 path: "/dashboard/add-post",
@@ -87,7 +90,6 @@ exports.createPost = async (req, res) => {
                 fullname: req.user.fullname,
             });
         }
-    }
 };
 
 exports.EditPost = async (req, res) => {
