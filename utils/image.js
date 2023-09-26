@@ -1,4 +1,6 @@
 const mime = require("mime-types");
+const multer = require("multer");
+const {fileFilter} = require("./multer");
 exports.validation = (files) => {
   let message = null;
   if (files === null) {
@@ -10,10 +12,6 @@ exports.validation = (files) => {
 
     if (!mimeType) {
       message = "MIME type not found for the uploaded file.";
-    }
-
-    if (!mimeType.startsWith("image")) {
-      message = "Only images are allowed";
     }
   }
   return message;

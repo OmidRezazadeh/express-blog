@@ -14,6 +14,9 @@ const blogSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: "User"
     }, createdAt: {
         type: Date, default: Date.now
+    },
+    thumbnail:{
+        type: String,
     }
 });
 const statusLabel = [{key: 0, value: "عمومی"}, {key: 1, value: "خصوصی"}];

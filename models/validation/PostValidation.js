@@ -1,6 +1,6 @@
 const Joi = require('joi');
 exports.schema = Joi.object({
-    status: Joi.required().valid('0', '1').messages({
+    status: Joi.valid('0', '1').messages({
         'any.required': 'status is required',
         'string.valid': ' لطفا یک مورد را انتخاب کنید ',
     }), title: Joi

@@ -24,6 +24,7 @@
     "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "font-awesome": "^4.7.0",
+    "fs": "^0.0.1-security",
     "jalali-moment": "^3.3.11",
     "joi": "^17.10.1",
     "mime-types": "^2.1.35",
