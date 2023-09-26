@@ -42,11 +42,14 @@ exports.getAddPost = (req, res) => {
     }
 };
 exports.createPost = async (req, res) => {
-    // const fileName = ` ${shortId.generate()}_${thumbnail.name}`;
-    // const uploadPath = `${appRoot}/public/uploads/thumbnails/${fileName}`;
-console.log(req.files);
+    const thumbnail = req.files ? req.files.thumbnail : {};
+    const fileName = `${shortId.generate()}_${thumbnail.name}`;
+    const uploadPath = `${appRoot}/public/uploads/thumbnail/${fileName}`;
+
+
     let status = Number(req.body.status);
     try {
+        await sharp(thumbnail.data).jpeg({quality:60}).toFile(uploadPath).catch((err) => console.log(err));
         await Blog.create({
             title: req.body.title,
             body: req.body.body,
@@ -58,19 +61,19 @@ console.log(req.files);
         res.redirect("/dashboard/add-post");
     } catch (err) {
 
-        let imageErrorMessage = validationImage.validation(req.files);
+        const imageErrorMessage = validationImage.validation(req.files);
 
-        const { error } = schema.validate(req.body);
+        const {error} = schema.validate(req.body);
 
         let errorMessage = null;
         let errors = [];
-        console.log(error.details[0]["message"]);
+
         if (error.details[0]["message"].length > 0) {
             errorMessage = error.details[0]["message"];
             errors.push(errorMessage);
         }
 
-        if(imageErrorMessage !== null){
+        if (imageErrorMessage !== null) {
             errors.push(imageErrorMessage);
         }
 
