@@ -1,8 +1,9 @@
 <% if(posts.length > 0) { %> <% for(let post of posts) { %>
     <div class="card mt-4 mb-4">
+        <%= post.thumbnail %>
         <img
                 class="card-img-top"
-                src="http://placehold.it/750x300"
+                src="http://localhost:5000/uploads/thumbnail/<%= post.thumbnail%>"
                 alt="Card image cap"
         />
         <div class="card-body">
