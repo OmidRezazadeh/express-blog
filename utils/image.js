@@ -6,7 +6,10 @@ exports.validation = (files) => {
   } else {
     const image = files.thumbnail;
     const mimeType = mime.contentType(image.mimetype);
-    if(mimeType !== 'image/jpeg' || mimeType !== 'image/png'){
+  
+   const mimeTypeArray=["image/jpeg","image/png"]
+
+    if(!mimeTypeArray.includes(mimeType)){
       message = "MIME type not found for the uploaded file.";
     }
   }
