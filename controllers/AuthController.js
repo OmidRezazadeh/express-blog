@@ -2,6 +2,7 @@ const User = require("../models/User");
 const {schema} = require("../models/validation/UserValidation");
 const passport = require("passport");
 const fetch = require("node-fetch");
+const { sendEmail } = require("../utils/mailer");
 
 exports.login = (req, res) => {
     res.render("login", {
@@ -56,6 +57,10 @@ exports.store = async (req, res) => {
             fullname: req.body.fullname, email: email, password: req.body.password,
         };
         await User.create(user);
+         sendEmail(email,req.body.fullname,
+            "خوش امدی به بلاگ",
+            "خوش امدی "
+            )
         req.flash("success_message", "ثبت نام موفقیت امیز بود ")
         res.redirect("/users/login");
     } catch (err) {

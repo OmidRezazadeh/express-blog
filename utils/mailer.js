@@ -12,15 +12,16 @@ const transportDatails= smtpTransport({
             rejectUnauthorized:false
         }
 })
-const transporter= nodemailer.createTransport(transportDatails);
-const options={
-    from:"omid@gmail.com",
-    to:"orprogrammer@gmail.com",
-    subject:"test",
-    text:"test send"
-}
+ exports.sendEmail=(email,fullname, subject, message)=>{
+    const transporter = nodemailer.createTransport(transportDatails);
+    transporter.sendMail({
+        from:"omid@gmail.com",
+        to:email,
+        subject:subject,
+        html:`<h1>
+        سلام ${fullname}
+        </h1>
+        <p>${message}</p>`
 
-transporter.sendMail(options,(err,info)=>{
-    if(err) return console.log(err);
-    console.log(info);
-});
+    })
+ }

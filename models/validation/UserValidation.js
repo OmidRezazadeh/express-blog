@@ -6,7 +6,6 @@ exports.schema = Joi.object({
         'any.required': 'Full name is required',
         'string.min': 'Full name must be at least 4 characters',
         'string.max': 'Full name cannot exceed 255 characters',
-        'string.alphanum': 'Full name can only contain alphanumeric characters'
     }),
     email: Joi.string()
         .email()
