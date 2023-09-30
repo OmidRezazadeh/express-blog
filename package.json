@@ -27,6 +27,7 @@
     "fs": "^0.0.1-security",
     "jalali-moment": "^3.3.11",
     "joi": "^17.10.1",
+    "jsonwebtoken": "^9.0.2",
     "mime-types": "^2.1.35",
     "mongoose": "^7.5.0",
     "mongoose-paginate": "^5.0.3",
