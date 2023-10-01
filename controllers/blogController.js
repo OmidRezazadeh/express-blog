@@ -32,3 +32,16 @@ exports.getSinglePost = async (req, res) => {
         res.render("errors/500")
     }
 }
+exports.getContactPage=(req,res)=>{
+    res.render("contact",{
+        pageTitle:" تماس باما",
+        path:"/contact",
+        message:req.flash("success_message"),
+        error:req.flash("error"),
+ 
+    });
+
+exports.handlerContact=(req,res)=>{
+    
+}    
+}
