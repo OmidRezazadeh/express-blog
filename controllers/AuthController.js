@@ -166,7 +166,6 @@ exports.handelRestPassword = async (req, res) => {
     }
     const  user  = await User.findOne({_id:req.params.id});
     if (!user){
-        console.log("ok");
         return  res.redirect("/404");
     }
     user.password= password;
