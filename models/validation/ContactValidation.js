@@ -12,5 +12,9 @@ exports.schema = Joi.object({
   message: Joi.string().required().messages({
     "string.message": "message must be a valid email address",
     "any.required": "message is required",
-  }), 
+  }),
+  captcha:Joi.required().messages({
+    "any.required": "captcha is required",
+  })
+
 });
