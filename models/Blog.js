@@ -15,7 +15,7 @@ const blogSchema = new mongoose.Schema({
     }, createdAt: {
         type: Date, default: Date.now
     },
-    thumbnail:{
+    thumbnail: {
         type: String,
     }
 });
@@ -29,6 +29,8 @@ blogSchema.plugin(mongoosePaginate);
 blogSchema.virtual("jalaliDate").get(function () {
     return formatDate(this.createdAt);
 });
+blogSchema.index({title: "text"});
+
 blogSchema.statics.PostValidation = function (body) {
     return schema.validate(body, {abortEarly: false});
 }

@@ -1,4 +1,5 @@
-<% if(posts.length > 0) { %> <% for(let post of posts) { %>
+<% if(posts.length > 0)
+{ %> <% for(let post of posts) { %>
     <div class="card mt-4 mb-4">
         <%= post.thumbnail %>
         <img
@@ -15,7 +16,26 @@
             پست شده در تاریخ : <%= post.jalaliDate %>
         </div>
     </div>
-<% } %> <% } else {%>
+
+
+
+
+<% } %>
+
+
+<nav aria-label="Page navigation">
+    <% if (pages > 1) { %>
+        <% for (let i = 1; i <= pages; i++) { %>
+        <ul class="pagination">
+
+            <li class="page-item">   <a href="/dashboard?page=<%= i %>" class="<%= i === current ? 'active' : '' %>"><%= i %></a></li>
+            <% } %>
+        </ul>
+
+    <% } %>
+</nav>
+
+<% } else {%>
     <div class="m-5 text-center">
         <h1>هیچ پستی در پایگاه داده نیست</h1>
     </div>

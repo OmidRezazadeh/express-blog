@@ -6,4 +6,5 @@ router.get("/post/:id", blogController.getSinglePost);
 router.get("/contact", blogController.getContactPage);
 router.post("/contact", blogController.handlerContact);
 router.get('/captcha.png', blogController.getCaptcha);
+router.post("/search", blogController.handlerSearch);
 module.exports = router;
